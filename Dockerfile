@@ -1,5 +1,6 @@
 FROM alpine:3.9
-MAINTAINER Dmitry Prazdnichnov <dp@bambucha.org>
+
+LABEL maintainer="docker-dario@neomediatech.it"
 
 ARG VERSION=4.91-r3
 
