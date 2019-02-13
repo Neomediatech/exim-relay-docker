@@ -35,19 +35,19 @@ version: "2"
 services:
   smtp:
     restart: always
-    image: bambucha/exim-relay
+    image: neomediatech/exim-relay
     user: exim
     ports:
       - "25:25"
     volumes:
       - smtp-dkim:/dkim
-    hostname: mail.example.com
+    hostname: mail.example.tld
     environment:
       - RELAY_FROM_HOSTS=10.0.0.0/8:172.16.0.0/12:192.168.0.0/16
       - DKIM_KEY_SIZE=1024
       - DKIM_SELECTOR=dkim
       - DKIM_SIGN_HEADERS=Date:From:To:Subject:Message-ID
-      - DKIM_DOMAINS=example.com
+      - DKIM_DOMAINS=example.tld
 volumes:
   smtp-dkim:
     driver: local
@@ -58,7 +58,7 @@ volumes:
 Create [Reverse PTR](https://en.wikipedia.org/wiki/Reverse_DNS_lookup) DNS record:
 
 ```
-1.0.168.192.in-addr.arpa. 300 IN PTR mail.example.com.
+1.0.168.192.in-addr.arpa. 300 IN PTR mail.example.tld.
 ```
 
 ## SPF
@@ -66,7 +66,7 @@ Create [Reverse PTR](https://en.wikipedia.org/wiki/Reverse_DNS_lookup) DNS recor
 Create [SPF](http://openspf.org) DNS record:
 
 ```
-example.com. 300 IN TXT "v=spf1 a mx -all"
+example.tld. 300 IN TXT "v=spf1 a mx -all"
 ```
 
 ## DKIM
@@ -74,25 +74,25 @@ example.com. 300 IN TXT "v=spf1 a mx -all"
 Get dkim public key with docker exec:
 
 ```shell
-docker exec -it smtp cat /dkim/example.com.pub
+docker exec -it smtp cat /dkim/example.tld.pub
 ```
 
 or get dkim public key with docker-compose exec:
 
 ```shell
-docker-compose exec smtp cat /dkim/example.com.pub
+docker-compose exec smtp cat /dkim/example.tld.pub
 ```
 
 or get dkim public key from docker volume:
 
 ```shell
-sudo cat /var/lib/docker/volumes/smtp-dkim/_data/example.com.pub
+sudo cat /var/lib/docker/volumes/smtp-dkim/_data/example.tld.pub
 ```
 
 Create [DKIM](http://dkim.org) DNS record:
 
 ```
-dkim._domainkey.example.com. 300 IN TXT "v=DKIM1; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGPU5V6weixC6zPq+muZ2q0F7VkAfIV37ZjmZIK0Y0Kiz7ZiBIOjcVS958ncFnyqleSroqPV7ftgAykbxkIX/Rnq58VkxsCk7vO0nav0/cF0VlTP7/Pxe2PO4BYRW53rWUI6iOi7Y49q/1zWgcEa+fqc8FUqFvDebKtkeQy84BwIDAQAB"
+dkim._domainkey.example.tld. 300 IN TXT "v=DKIM1; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADC9lhL8JV76xS4eqyGZGFlC6zPq+muZ2q0F7VkAfIV37ZjmZIK0Y0Kiz7ZiBIOjcVS958ncFnyqleSroqPV7ftgAykbxkIX/Rnq58VkxsCk7vO0nav0/cF0VlTP7/Pxe2PO4BYRW53rWUI6iOi7Y49q/1zWgcEa+fqc8FUqFJlyYork3LKZxa6iTCiRs"
 ```
 
 ## Debug
@@ -164,7 +164,7 @@ docker exec -it smtp exim -Mrm <message-id> [ <message-id> ... ]
 Send a message:
 
 ```shell
-echo "Test message" | mailx -v -r "sender@example.com" -s "Test subject" -S smtp="localhost:25" recipient@example.com
+echo "Test message" | mailx -v -r "sender@example.tld" -s "Test subject" -S smtp="localhost:25" recipient@example.tld
 ```
 
 ## License
