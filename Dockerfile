@@ -1,7 +1,7 @@
-FROM alpine:3.6
+FROM alpine:3.9
 MAINTAINER Dmitry Prazdnichnov <dp@bambucha.org>
 
-ARG VERSION=4.89-r5
+ARG VERSION=4.91-r3
 
 LABEL org.label-schema.version=$VERSION \
       org.label-schema.vcs-url=https://github.com/bambocher/docker-exim-relay \
