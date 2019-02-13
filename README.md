@@ -3,6 +3,7 @@
 [![](https://images.microbadger.com/badges/image/neomediatech/exim-relay.svg)](https://microbadger.com/images/neomediatech/exim-relay)
 [![](https://images.microbadger.com/badges/license/neomediatech/exim-relay.svg)](https://microbadger.com/images/neomediatech/exim-relay)
 ![](https://img.shields.io/github/last-commit/Neomediatech/exim-relay-docker.svg?style=plastic)
+![](https://img.shields.io/github/repo-size/Neomediatech/exim-relay-docker.svg?style=plastic)
 
 [Exim](http://exim.org/) relay [Docker](https://docker.com/) image based on [Alpine](https://alpinelinux.org/) Linux and support DKIM.
 
