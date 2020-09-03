@@ -1,8 +1,8 @@
-FROM alpine:3.9
+FROM alpine:3.12
 
 LABEL maintainer="docker-dario@neomediatech.it"
 
-ARG VERSION=4.91-r3
+ARG VERSION=4.93-r1	
 
 LABEL org.label-schema.version=$VERSION \
       org.label-schema.vcs-url=https://github.com/Neomediatech/exim-relay-docker \
